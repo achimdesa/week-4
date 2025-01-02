@@ -1,250 +1,132 @@
-# week-3
+# Rossmann Pharmaceuticals: Sales Forecasting and Data Exploration
 
-Sure! Here’s a detailed README.md for all Tasks, including a single markdown that clearly explains the work done for Tasks of my project.
-
-# Insurance Analytics - Task 1: Exploratory Data Analysis (EDA)
-
-## Project Overview
-
-This project is part of the AlphaCare Insurance Solutions (ACIS) analytics initiative aimed at understanding and optimizing insurance business operations. The focus is on historical insurance data to uncover patterns and insights that can enhance customer targeting, improve marketing strategies, and minimize risk. 
-
-Task 1 involves conducting an Exploratory Data Analysis (EDA) on the given dataset to derive key insights about insurance policies, claims, premiums, and other attributes.
+### Author: Aga Chimdesa
 
 ---
 
-## Dataset Overview
+## **Introduction**
 
-The dataset contains insurance-related information with the following columns:
+Rossmann Pharmaceuticals is a large retail chain with multiple stores across various cities. Managers in individual stores have traditionally relied on personal experience to forecast sales. However, the finance team has identified the need for a more data-driven approach to predict sales six weeks ahead of time.
 
-- **UnderwrittenCoverID**: A unique identifier for each insurance policy.
-- **PolicyID**: A unique identifier for each policyholder.
-- **TransactionMonth**: The date of the transaction.
-- **IsVATRegistered**: Indicates whether the policyholder is VAT registered.
-- **Citizenship**: The citizenship of the policyholder.
-- **LegalType**: The legal status of the entity (e.g., Close Corporation, Sole Proprietorship).
-- **Title**: The title of the policyholder (e.g., Mr., Ms.).
-- **Language**: The preferred language of the policyholder.
-- **Bank**: The bank associated with the policyholder.
-- **AccountType**: The type of bank account (e.g., Current, Savings).
-- **MaritalStatus**: The marital status of the policyholder.
-- **Gender**: The gender of the policyholder.
-- **Country, Province, PostalCode**: Geographic location of the policyholder.
-- **MainCrestaZone, SubCrestaZone**: Geographical zones for insurance risk categorization.
-- **ItemType**: Type of item insured (e.g., Mobility - Motor).
-- **VehicleType, Make, Model, Cylinders**: Details about insured vehicles (if applicable).
-- **SumInsured**: The total sum insured under the policy.
-- **CalculatedPremiumPerTerm**: The premium amount paid for the insurance term.
-- **TotalPremium, TotalClaims**: The total premiums paid and total claims made by the policyholder.
+The objective of this analysis is to explore customer purchasing behavior and forecast sales using a variety of factors such as promotions, competition, holidays, and seasonality. This report covers the exploratory data analysis (EDA) phase of the project, which will form the foundation for machine learning and deep learning models.
 
 ---
 
-## Objective
+## **Project Structure**
 
-The goal of Task 1 is to:
-1. Summarize the dataset and provide descriptive statistics.
-2. Perform data quality assessment (checking for missing values, data types, and potential outliers).
-3. Conduct univariate, bivariate, and multivariate analysis to uncover trends, correlations, and distributions.
-4. Visualize key insights to aid in decision-making.
-5. Prepare the data for subsequent tasks.
+This repository contains the following files:
+
+- **notebooks/**: Contains the Jupyter notebooks for EDA, feature engineering, and visualizations.
+- **scripts/**: Contains modular Python scripts for data processing and visualizations.
+  - `data_processing.py`: Handles data cleaning and feature engineering.
+  - `visualizations.py`: Contains functions to generate visualizations such as sales distribution, promo effect, and competition analysis.
+- **data/**: Contains the dataset files used for the analysis.
+  - `train.csv`: Historical sales data including features like store, date, customers, open status, etc.
+  - `store.csv`: Additional store information including store type, assortment level, and competition details.
+  - `test.csv`: Test set without the sales column (for prediction purposes).
 
 ---
 
-## Steps in Task 1
+## **Business Need**
 
-1. Data Loading
+Rossmann Pharmaceuticals' finance team seeks to forecast sales across various stores six weeks ahead, allowing the company to plan resources and marketing strategies more efficiently. The primary objective is to:
+- Explore customer purchasing behavior and identify key trends.
+- Predict daily sales across stores based on various features like promotions, holidays, and competition.
+- Serve these predictions in a real-time dashboard for the finance team.
 
-We start by loading the dataset into a Pandas DataFrame for analysis. The dataset was provided in a `.txt` file format.
+---
 
-import pandas as pd
+## **Data Overview**
 
-Load the dataset
-df = pd.read_csv("data/MachineLearningRating_v3.txt", delimiter="|", low_memory=False) 
+The dataset consists of sales data from 2013 to 2015 and includes the following files:
 
-2. Data Summarization:
+- **train.csv**: Contains daily sales figures for each store along with features like store type, promotion status, state holidays, etc.
+- **store.csv**: Contains details about each store, including distance to competitors, assortment type, and promotional information.
 
- We use descriptive statistics to get an initial understanding of the dataset, including numerical features like TotalPremium, TotalClaims, and categorical variables such as Citizenship, LegalType, and VehicleType.
+### Key Columns:
+- **Store**: Unique identifier for each store.
+- **Sales**: Daily turnover for a given store.
+- **Customers**: Number of customers for that day.
+- **Promo**: Whether the store was running a promotion that day.
+- **StateHoliday**: Whether the day was a state holiday.
+- **CompetitionDistance**: Distance to the nearest competitor store.
+- **Promo2**: Whether the store is part of a continuous promotion campaign.
 
-Data summary
-print(df.describe(include='all')) 
+---
 
-3. Data Quality Assessment
+## **Exploratory Data Analysis (EDA)**
 
- Missing Values: We check for missing values to assess data quality. 
+The EDA focused on understanding the relationships between the key features and how they impact sales across different stores.
 
- Data Types: Review the data types of each column and ensure proper formatting (e.g., categorical variables, date columns). 
- 
- Outliers: Detect outliers using box plots, particularly for TotalPremium and TotalClaims.
+### **1. Sales Distribution**
+We analyzed the distribution of sales across all stores. The data showed that the majority of stores have sales concentrated in the range of €2,000 to €10,000 per day, with some outliers.
 
-Check for missing values
-print(df.isnull().sum())
+- **Key Finding**: Most stores have consistent sales, but there are a few high-performing stores with significantly higher sales.
 
-Check data types
-print(df.dtypes) 
+![Sales Distribution](sales_distribution_plot.png)
 
-4. Univariate Analysis:
+### **2. Promotion Impact on Sales**
+We examined how promotions affect sales. Promotions play a crucial role in attracting more customers and boosting sales, as evident from the data.
 
- We explore the distribution of individual variables using Histograms for numerical columns like SumInsured, TotalPremium, and TotalClaims. Bar charts for categorical variables like Citizenship, VehicleType, and LegalType.
+- **Key Finding**: Stores running promotions see a significant increase in sales compared to non-promo days.
 
-import matplotlib.pyplot as plt
+![Promo Effect on Sales](promo_effect_plot.png)
 
-Plot histogram for TotalPremium
-df['TotalPremium'].hist(bins=50) plt.title('Distribution of TotalPremium') plt.xlabel('TotalPremium') plt.ylabel('Frequency') plt.show()
+### **3. Store Type and Sales**
+Stores are categorized into different types (`a`, `b`, `c`, `d`), each representing a specific business model. The analysis showed that certain store types consistently outperform others.
 
-Plot bar chart for Citizenship
-df['Citizenship'].value_counts().plot(kind='bar') plt.title('Citizenship Distribution') plt.xlabel('Citizenship') plt.ylabel('Count') plt.show() 
+- **Key Finding**: Store types `a` and `b` have the highest sales, indicating that they are possibly located in more lucrative areas or cater to higher customer demand.
 
-5. Bivariate and Multivariate Analysis:
+![Store Type vs Sales](store_type_vs_sales_plot.png)
 
- We explore relationships between key variables, such as TotalPremium vs TotalClaims, using:
+### **4. Competition Distance and Sales**
+The distance to the nearest competitor store is an important factor in determining sales. We analyzed how this distance affects sales figures.
 
-Scatter plots to visualize correlations. Correlation matrix to quantify the strength of relationships between numerical variables.
+- **Key Finding**: Stores located farther from competitors generally have higher sales, although the effect is not always linear.
 
-Scatter plot for TotalPremium vs TotalClaims
-df.plot.scatter(x='TotalPremium', y='TotalClaims') plt.title('TotalPremium vs TotalClaims') plt.show()
+![Competition Effect on Sales](competition_effect_plot.png)
 
-Correlation matrix
-correlation_matrix = df.corr() print(correlation_matrix) 
+### **5. Seasonal and Holiday Trends**
+We also explored how sales fluctuate during public holidays and specific seasons (e.g., Christmas, Easter). Holidays generally cause temporary dips in sales, but stores tend to recover quickly with higher-than-usual sales afterward.
 
-6. Outlier Detection:
+---
 
- We use box plots to detect outliers in numerical features, especially focusing on TotalPremium and TotalClaims.
+## **Data Cleaning and Feature Engineering**
 
-Box plot for TotalPremium
-df.boxplot(column='TotalPremium') plt.title('Box Plot for TotalPremium') plt.show() 
+To prepare the data for machine learning, several data cleaning and feature engineering steps were performed:
 
-7. Data Visualization:
+### **Data Cleaning**
+- Missing values in `CompetitionDistance`, `Promo2SinceYear`, and similar columns were handled by filling them with median values or zero.
+- Outliers in sales data were identified but not removed, as they represent high-performing stores.
 
- Three creative and meaningful visualizations were developed:
+### **Feature Engineering**
+- **CompetitionOpen**: We calculated how many months the nearest competitor has been open.
+- **Promo2Open**: We calculated how many weeks each store has participated in continuous promotions.
+- **Holiday Features**: Extracted whether a particular day was before or after a holiday.
 
-Distribution of TotalPremium. 
+---
 
-Citizenship Distribution. 
+## **Key Insights**
 
-Correlation heatmap for numerical features. 
+- **Promotions Matter**: Stores running promotions see a clear boost in sales, especially during holiday seasons.
+- **Store Type Performance**: Certain store types (especially type `a`) outperform others in terms of sales.
+- **Competition Influence**: Distance to competitors plays a role, but it's more pronounced for some stores than others.
+- **Seasonality**: Sales spike around public holidays, especially Christmas and Easter, suggesting a strong seasonal trend.
 
-## Key Findings 
+---
 
-Missing Values: Certain fields, like Citizenship and PostalCode, have missing values, which need to be addressed. 
+## **Recommendations**
 
-Outliers: Significant outliers were detected in TotalPremium and TotalClaims. 
+1. **Maximize Promo Effectiveness**:
+   - Focus promotional campaigns on high-performing store types (`a` and `b`) and during key holidays like Christmas and Easter.
+   - Leverage promo data to refine targeted marketing strategies for stores located in high-competition areas.
 
-Correlations: There is a positive correlation between TotalPremium and TotalClaims, indicating that higher premiums are associated with more claims. 
+2. **Store-Specific Strategies**:
+   - For stores located near competitors, consider increasing promotional frequency or offering loyalty programs to retain customers.
+   - Invest in stores located in areas without nearby competitors, as they tend to have higher sales.
 
-Data Distribution: The distribution of TotalPremium is heavily skewed, suggesting the need for transformation or handling in future tasks.
+3. **Holiday Planning**:
+   - Allocate more resources and promotional budget to stores in the lead-up to major holidays, as this is when customer activity peaks.
+   - Consider adjusting store hours or offerings during post-holiday periods to maximize the sales spike.
 
-# Task 2: Data Version Control (DVC) Setup
- ## Objective
-  The objective of Task 2 is to set up Data Version Control (DVC) for tracking data versions, enabling reproducibility of analysis, and ensuring proper management of data and model files.
-
-## Steps in Task 2 DVC Installation:
-
-Installed DVC using the following command:
-
-pip install dvc
-
-Initializing DVC in the Project:
-
-Initialized DVC in the project directory to set up version control for data files:
-
-dvc init Tracking Data with DVC:
-
-Added the data files to be tracked by DVC:
-
-dvc add data/MachineLearningRating_v3.txt This step creates .dvc files that record metadata about the tracked data files.
-
-Storing Data Remotely:
-
-Configured a remote storage location (e.g., S3, GDrive, or a local folder) to store large datasets:
-
-dvc remote add -d myremote /path/to/remote/storage dvc push This allows the team to store the dataset remotely and access it by pulling the latest version when needed.
-
-Data Versioning:
-
-Once the data is versioned, any changes or updates to the dataset are tracked by DVC. To check the status and re-run pipelines after modifying data:
-
-dvc status dvc repro
-
-Pushing DVC Changes:
-
-After adding new data or modifying existing data, push the changes to the remote storage:
-
-dvc push
-
-Collaborating with DVC:
-
-Team members can pull the latest version of the dataset for analysis:
-
-dvc pull
-
-# Task 3: A/B Hypothesis Testing
-
-Perform A/B hypothesis testing on different categorical features to evaluate risk and profit differences. Accept or reject null hypotheses based on statistical significance (p-value < 0.05). Provide insights to help AlphaCare Insurance Solutions make data-driven decisions regarding pricing and risk management. 
-
-## Hypotheses Tested
-
-1. Risk Differences Across Provinces (TotalClaims) Null Hypothesis (H₀): There is no risk difference between provinces. Alternative Hypothesis (H₁): There is a significant risk difference between provinces.
-2. Risk Differences Between Zip Codes (TotalClaims) Null Hypothesis (H₀): There is no risk difference between zip codes. Alternative Hypothesis (H₁): There is a significant risk difference between zip codes.
-3. Margin Differences Between Zip Codes (TotalPremium) Null Hypothesis (H₀): There is no significant margin (profit) difference between zip codes. Alternative Hypothesis (H₁): There is a significant margin (profit) difference between zip codes.
-4. Risk Differences Between Men and Women (TotalClaims) Null Hypothesis (H₀): There is no significant risk difference between men and women. Alternative Hypothesis (H₁): There is a significant risk difference between men and women. 
-
-## Steps in Task 3
-1. Data Segmentation: For each hypothesis test, the dataset was segmented into two groups:
-Control Group: Group A without a certain feature (e.g., province or gender). 
-Test Group: Group B with a different feature (e.g., different province or gender). 
-2. Statistical Testing: We used appropriate statistical tests based on the data type and feature.
-T-test for continuous variables (TotalClaims, TotalPremium). 
-Chi-square test for categorical variables (e.g., Gender vs. TotalClaims). 
-3. Analysis and Reporting After performing the statistical tests, the p-values were compared to the significance level (alpha = 0.05) to either accept or reject the null hypothesis.
-
-##Results
-
-*Risk Differences Across Provinces (T-test) p-value: 0.0563 Conclusion: Fail to reject the null hypothesis (no significant result).
-*Risk Differences Between Zip Codes (T-test) p-value: 0.5023 Conclusion: Fail to reject the null hypothesis (no significant result).
-*Margin Differences Between Zip Codes (T-test) p-value: 1.48e-20 Conclusion: Reject the null hypothesis (significant result). This indicates significant margin differences between zip codes.
-*Risk Differences Between Men and Women (Chi-square) p-value: 1.0 Conclusion: Fail to reject the null hypothesis (no significant result). 
-
-##Insights and Recommendations 
-*Location-Based Pricing: The significant margin differences between zip codes suggest that AlphaCare could adjust premiums based on location to optimize profitability.
-*No Gender-Based Risk Adjustment: No significant risk difference was found between men and women. Thus, gender-based premium differentiation may not be necessary.
-*Focus on Zip Code Segmentation: Further exploration of zip code-related risk and margin differences could lead to more refined marketing and pricing strategies.
-
-#Task 4- Modeling
-
-##Steps in Task 4
-
-1. Data Preparation 
-*Handling Missing Data: Imputed missing numerical values with the median and categorical values with the most frequent category. *Feature Engineering: Created new features where necessary, such as interaction terms or derived variables. 
-*Encoding Categorical Variables: Converted categorical variables to a numerical format using one-hot encoding for model compatibility.
-*Detecting outliers
-
-2. Modeling Techniques
- We trained four models on the processed dataset:
-*Linear Regression 
-*Decision Tree Regressor 
-*Random Forest Regressor 
-*XGBoost Regressor 
-
-3. Model Evaluation
- Each model was evaluated using:
-
-*Mean Squared Error (MSE): Measures the average squared difference between actual and predicted values. 
-*Mean Absolute Error (MAE): Measures the average absolute difference between actual and predicted values. 
-*R-Squared: Indicates the proportion of variance explained by the model (closer to 1 is better). 
-
-4. Feature Importance Analysis:
- SHAP (SHapley Additive exPlanations) was used to analyze feature importance for the Random Forest model, providing interpretability on how each feature contributed to the model’s predictions.
-
-##Results
-
-*Linear Regression Mean Squared Error: 4.62e+29 Mean Absolute Error: 1.94e+12 R-Squared: -9.45e+22 (Poor performance, likely due to data scaling issues or multicollinearity).
-*Decision Tree Mean Squared Error: 761,858 Mean Absolute Error: 14.05 R-Squared: 0.844 (Strong performance with good predictive power).
-*Random Forest Mean Squared Error: 1,491,559 Mean Absolute Error: 26.67 R-Squared: 0.821 (Good performance, slightly lower than Decision Tree).
-*XGBoost Mean Squared Error: 1,311,496 Mean Absolute Error: 24.88 R-Squared: 0.835 (Comparable to Decision Tree and Random Forest). 
-
-Feature Importance SHAP analysis indicated that features such as VehicleType, SumInsured, and CalculatedPremiumPerTerm had the most significant impact on the prediction of TotalClaims. Insights and Recommendations Decision Tree and XGBoost Models: Both models performed well in predicting TotalClaims with strong R-Squared values above 0.8. Decision Tree provided the best performance, but XGBoost showed competitive results, suggesting that both can be used effectively.
-
-**Linear Regression Limitations: Linear Regression underperformed, possibly due to multicollinearity and outliers in the dataset. Further data transformation and scaling are necessary to improve performance for linear models.
-
-**Focus on Important Features: Based on SHAP analysis, AlphaCare should focus on key features such as VehicleType, SumInsured, and CalculatedPremiumPerTerm when assessing risk and determining premiums.
-
-**Model Choice for Future Use: AlphaCare should prioritize using Decision Tree and XGBoost for predictive analytics, as these models show strong predictive power and interpretability.
+---
