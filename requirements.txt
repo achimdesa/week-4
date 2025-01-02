@@ -1,8 +1,8 @@
 seaborn
 matplotlib
 pandas
-scikit-learn
-dvc
-scipy
 numpy
-xgboost 
+scikit-learn   
+tensorflow 
+flask 
+joblib
