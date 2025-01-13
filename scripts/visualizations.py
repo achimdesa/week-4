@@ -32,3 +32,17 @@ def plot_competition_effect(df):
     plt.xlabel("Competition Distance")
     plt.ylabel("Sales")
     plt.show()
+
+# Plot Sales Behavior Around Holidays
+def plot_sales_around_holidays(df):
+    plt.figure(figsize=(12, 6))
+    sns.lineplot(data=merged_data, x='Date', y='Sales', hue='Holiday', estimator='mean')
+    plt.title('Sales Behavior Around Holidays')
+    plt.xlabel('Date')
+    plt.ylabel('Average Sales')
+    plt.xticks(rotation=45)
+    plt.legend(title='Holiday')
+    plt.tight_layout()  # Adjust layout for better fit
+    plt.show()
+
+
