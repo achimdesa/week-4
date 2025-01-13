@@ -1,0 +1,61 @@
+INFO:root:Data loaded and cleaned
+INFO:root:Promotions distribution analyzed
+INFO:matplotlib.category:Using categorical units to plot a list of strings that are all parsable as floats or dates. If these strings should be plotted as numbers, cast to the appropriate data type before plotting.
+INFO:matplotlib.category:Using categorical units to plot a list of strings that are all parsable as floats or dates. If these strings should be plotted as numbers, cast to the appropriate data type before plotting.
+INFO:matplotlib.category:Using categorical units to plot a list of strings that are all parsable as floats or dates. If these strings should be plotted as numbers, cast to the appropriate data type before plotting.
+INFO:matplotlib.category:Using categorical units to plot a list of strings that are all parsable as floats or dates. If these strings should be plotted as numbers, cast to the appropriate data type before plotting.
+INFO:matplotlib.category:Using categorical units to plot a list of strings that are all parsable as floats or dates. If these strings should be plotted as numbers, cast to the appropriate data type before plotting.
+INFO:matplotlib.category:Using categorical units to plot a list of strings that are all parsable as floats or dates. If these strings should be plotted as numbers, cast to the appropriate data type before plotting.
+INFO:matplotlib.category:Using categorical units to plot a list of strings that are all parsable as floats or dates. If these strings should be plotted as numbers, cast to the appropriate data type before plotting.
+INFO:matplotlib.category:Using categorical units to plot a list of strings that are all parsable as floats or dates. If these strings should be plotted as numbers, cast to the appropriate data type before plotting.
+INFO:root:Starting exploratory data analysis.
+INFO:root:Data loaded successfully.
+INFO:root:Missing values in training data: Series([], dtype: int64)
+INFO:root:Missing values handled.
+INFO:root:Sales distribution plot created.
+INFO:root:Exploratory data analysis completed.
+INFO:root:Starting exploratory data analysis.
+INFO:root:Data loaded successfully.
+INFO:root:Missing values in training data: Series([], dtype: int64)
+INFO:root:Missing values handled.
+INFO:root:Sales distribution plot created.
+INFO:root:Exploratory data analysis completed.
+2025-01-13 00:51:27,244 - INFO - Starting exploratory data analysis.
+2025-01-13 00:51:27,762 - INFO - Data loaded successfully.
+2025-01-13 00:51:27,830 - INFO - Missing values in training data: Series([], dtype: int64)
+2025-01-13 01:05:48,317 - INFO - Starting exploratory data analysis.
+2025-01-13 01:05:48,757 - INFO - Data loaded successfully.
+2025-01-13 01:05:48,812 - INFO - Missing values in training data: Series([], dtype: int64)
+2025-01-13 01:05:48,954 - INFO - Missing values handled.
+2025-01-13 01:05:49,858 - INFO - Sales distribution plot created.
+2025-01-13 01:05:50,272 - INFO - Using categorical units to plot a list of strings that are all parsable as floats or dates. If these strings should be plotted as numbers, cast to the appropriate data type before plotting.
+2025-01-13 01:05:50,612 - INFO - Using categorical units to plot a list of strings that are all parsable as floats or dates. If these strings should be plotted as numbers, cast to the appropriate data type before plotting.
+2025-01-13 01:05:50,886 - INFO - promo effect on sales plot created.
+2025-01-13 01:05:51,999 - INFO - Store Type and Sales plot created.
+2025-01-13 01:05:53,771 - INFO - Competition Effect on Sales plot created.
+2025-01-13 01:05:53,771 - INFO - Exploratory data analysis completed.
+2025-01-13 01:20:33,027 - INFO - Starting exploratory data analysis.
+2025-01-13 01:20:33,455 - INFO - Data loaded successfully.
+2025-01-13 01:20:33,513 - INFO - Missing values in training data: Series([], dtype: int64)
+2025-01-13 01:20:34,168 - INFO - Missing values handled.
+2025-01-13 01:20:34,517 - INFO - Feature Engineering is done.
+2025-01-13 01:20:34,966 - INFO - Sales distribution plot created.
+2025-01-13 01:20:35,356 - INFO - Using categorical units to plot a list of strings that are all parsable as floats or dates. If these strings should be plotted as numbers, cast to the appropriate data type before plotting.
+2025-01-13 01:20:35,693 - INFO - Using categorical units to plot a list of strings that are all parsable as floats or dates. If these strings should be plotted as numbers, cast to the appropriate data type before plotting.
+2025-01-13 01:20:35,931 - INFO - promo effect on sales plot created.
+2025-01-13 01:20:36,965 - INFO - Store Type and Sales plot created.
+2025-01-13 01:20:38,759 - INFO - Competition Effect on Sales plot created.
+2025-01-13 01:20:38,759 - INFO - Exploratory data analysis completed.
+2025-01-13 01:32:45,655 - INFO - Starting exploratory data analysis.
+2025-01-13 01:32:46,103 - INFO - Data loaded successfully.
+2025-01-13 01:32:46,108 - INFO - Initial Data Overview.
+2025-01-13 01:32:46,167 - INFO - Missing values in training data: Series([], dtype: int64)
+2025-01-13 01:32:46,750 - INFO - Missing values handled.
+2025-01-13 01:32:47,072 - INFO - Feature Engineering is done.
+2025-01-13 01:32:47,535 - INFO - Sales distribution plot created.
+2025-01-13 01:32:47,881 - INFO - Using categorical units to plot a list of strings that are all parsable as floats or dates. If these strings should be plotted as numbers, cast to the appropriate data type before plotting.
+2025-01-13 01:32:48,202 - INFO - Using categorical units to plot a list of strings that are all parsable as floats or dates. If these strings should be plotted as numbers, cast to the appropriate data type before plotting.
+2025-01-13 01:32:48,420 - INFO - promo effect on sales plot created.
+2025-01-13 01:32:49,432 - INFO - Store Type and Sales plot created.
+2025-01-13 01:32:51,197 - INFO - Competition Effect on Sales plot created.
+2025-01-13 01:32:51,197 - INFO - Exploratory data analysis completed.

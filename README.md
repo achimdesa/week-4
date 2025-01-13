@@ -130,3 +130,89 @@ To prepare the data for machine learning, several data cleaning and feature engi
    - Consider adjusting store hours or offerings during post-holiday periods to maximize the sales spike.
 
 ---
+## Task 2: Prediction of Store Sales (Random Forest)
+
+With the EDA completed, the next steps involve building machine learning and deep learning models to forecast sales. This will include:
+- Preprocessing data for model input.
+- Building tree-based regression models (e.g., Random Forest) and Recurrent Neural Networks (LSTM) for time series forecasting.
+In this task, we use a Random Forest model to predict store sales based on historical data. The model considers factors such as promotions, holidays, and competition, which are crucial to predicting sales.
+
+### Steps
+1. **Data Preprocessing**:
+    - Convert non-numeric features to numeric.
+    - Handle missing values.
+    - Scale the data using `StandardScaler`.
+
+2. **Feature Engineering**: Extract additional features such as the number of days to holidays, day of the month, and other temporal features.
+
+3. **Model Training**:
+    - Split the data into training and testing sets.
+    - Train a Random Forest regressor using the training set.
+    - Evaluate model performance using RMSE (Root Mean Square Error).
+
+```python
+# Random Forest Model Training
+from sklearn.ensemble import RandomForestRegressor
+from sklearn.metrics import mean_squared_error
+from sklearn.model_selection import train_test_split
+
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+rf_model = RandomForestRegressor(n_estimators=100, random_state=42)
+rf_model.fit(X_train, y_train)
+
+# Predictions
+y_pred_rf = rf_model.predict(X_test)
+
+# Evaluation
+rmse_rf = mean_squared_error(y_test, y_pred_rf, squared=False)
+print(f"Random Forest RMSE: {rmse_rf}")
+
+
+# LSTM Model Training by deep learning
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import LSTM, Dense
+
+# Build LSTM model
+model = Sequential()
+model.add(LSTM(50, activation='relu', input_shape=(X_train.shape[1], 1)))
+model.add(Dense(1))
+
+model.compile(optimizer='adam', loss='mse')
+model.fit(X_train, y_train, epochs=10, batch_size=32, validation_data=(X_test, y_test))
+
+# Predictions
+y_pred_lstm = model.predict(X_test)
+
+# Evaluation
+rmse_lstm = mean_squared_error(y_test, y_pred_lstm, squared=False)
+print(f"LSTM RMSE: {rmse_lstm}")
+
+## Task 3: Model Serving API Call
+
+- Deploying the trained models through a REST API for real-time sales predictions.
+
+```python
+from flask import Flask, request, jsonify
+import pickle
+
+# Initialize Flask app
+app = Flask(__name__)
+
+# Load the pre-trained model
+with open('model_12-01-2025-17-00-04.pkl', 'rb') as model_file:
+    model = pickle.load(model_file)
+
+# Define the prediction route
+@app.route('/predict', methods=['POST'])
+def predict():
+    input_data = request.json
+    prediction = model.predict([input_data])
+    return jsonify({'sales_prediction': prediction[0]})
+
+if __name__ == '__main__':
+    app.run(debug=True)
+
+## **Contact**
+
+For any questions or further discussion, feel free to reach out:
+- **Email**: aga.orobank@gmail.com
