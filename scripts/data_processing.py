@@ -15,6 +15,10 @@ def clean_data(train, store):
     # Convert Date to datetime
     merged_data['Date'] = pd.to_datetime(merged_data['Date'])
     
+    # Create 'Holiday' column
+    merged_data['Holiday'] = merged_data['StateHoliday'].replace({'0': 'No Holiday', 'a': 'Public Holiday', 'b': 'Easter Holiday', 'c': 'Christmas'})
+
+    
     # Extracting features from the date
     merged_data['Year'] = merged_data['Date'].dt.year
     merged_data['Month'] = merged_data['Date'].dt.month
@@ -35,6 +39,8 @@ def feature_engineering(df):
     df['Promo2Open'] = df['Promo2Open'].apply(lambda x: x if x > 0 else 0)
     
     return df
+
+
 # data_processing.py
 import pandas as pd
 
